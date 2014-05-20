@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <title>Popcorn Test</title>
+</head>
+<body>
+  <h1>Popcorn Test</h1>
+  <audio id="audio">
+    <source src="audio/file.ogg" type="audio/ogg">
+    <source src="audio/file.mp4" type="audio/mp4">
+  </audio>
+  <p><button id="play_1">Play One</button> <button id="play_2">Play Two</button></p>
+  <script src="js/popcorn.js"></script>
+  <script src="js/popcorn.code.js"></script>
+  <script>
+    var audio = document.getElementById('audio');
+    
+    var popcorn = Popcorn(audio);
+
+    popcorn.code({
+      end: 5,
+      onEnd: function() {
+        this.pause();
+      }
+    });
+
+    popcorn.on('play', function() {
+      console.log('audio file is playing');
+    });
+
+    popcorn.on('pause', function() {
+      console.log('audio file is paused');
+    });
+
+    var play_one = document.getElementById('play_1');
+    play_one.addEventListener('click', function() {
+      console.log('play sprite 1');
+      popcorn.play();
+    }, false);
+
+    var play_two = document.getElementById('play_2');
+    play_two.addEventListener('click', function() {
+      console.log('play sprite 2');
+      popcorn.play(6);
+    }, false);
+
+  </script>
+</body>
+</html>
+
